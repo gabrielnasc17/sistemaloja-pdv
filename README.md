@@ -1,67 +1,122 @@
 # 🛒 SistemaLoja PDV
 
-Sistema desktop de **ponto de venda (PDV)** desenvolvido em Python com integração ao **Microsoft SQL Server**.
+Sistema desktop de **Ponto de Venda (PDV)** desenvolvido em Python e integrado ao **Microsoft SQL Server**, criado para auxiliar no controle de vendas, produtos, estoque e operações de caixa de uma loja.
 
-O projeto foi criado para centralizar rotinas de venda, controle de estoque, abertura e fechamento de caixa, consulta de preços, histórico e relatórios operacionais.
-
-> Projeto desenvolvido para estudo e portfólio, com apoio de IA em etapas de revisão, depuração, melhoria de interface e evolução do código.
+O projeto foi desenvolvido para estudo e portfólio, utilizando **IA como ferramenta de apoio** durante etapas de revisão de código, correção de erros, melhorias na interface e evolução das funcionalidades.
 
 ---
 
-## 🖥️ Visão geral
+## 🖥️ Interface do sistema
 
-![SistemaLoja PDV](docs/images/dashboard.png)
+### Tela principal
 
-> Adicione um print do sistema em `docs/images/dashboard.png`.
+Tela inicial do SistemaLoja, com acesso às principais funções do PDV.
+
+![Tela principal do PDV](docs/images/pdv-principal.png)
+
+---
+
+### 🛒 Registro de venda
+
+Tela utilizada para adicionar produtos ao carrinho e acompanhar quantidade, preço e valor total da venda.
+
+![Tela de venda](docs/images/venda.png)
+
+---
+
+### 💳 Forma de pagamento
+
+Durante a finalização da venda, o sistema permite selecionar diferentes formas de pagamento.
+
+![Formas de pagamento](docs/images/forma-de-pagamento.png)
+
+---
+
+### 💵 Pagamento em dinheiro
+
+Para pagamentos em dinheiro, o sistema permite informar o valor recebido e realiza o cálculo do troco.
+
+![Pagamento em dinheiro](docs/images/dinheiro.png)
+
+---
+
+### 📦 Produtos e estoque
+
+Área destinada ao cadastro, consulta e gerenciamento dos produtos disponíveis na loja.
+
+![Controle de estoque](docs/images/estoque.png)
 
 ---
 
 ## ✨ Funcionalidades
 
-- Cadastro e edição de produtos
+O sistema possui recursos como:
+
+- Cadastro de produtos
+- Edição de produtos
 - Controle de estoque
-- Consulta de preço por código de barras
-- Abertura e fechamento de caixa
+- Consulta de preços por código de barras
 - Registro de vendas
-- Leitura/entrada de código de barras
-- Pagamento em dinheiro, PIX, débito e crédito
-- Cálculo de troco
+- Carrinho de compras
+- Controle de quantidade dos produtos
+- Abertura de caixa
+- Fechamento de caixa
+- Controle de fundo de caixa
+- Pagamento em dinheiro
+- Pagamento via PIX
+- Pagamento no débito
+- Pagamento no crédito
+- Cálculo automático de troco
 - Histórico de vendas
-- Detalhes dos itens vendidos
-- Cancelamento de venda com retorno dos itens ao estoque
-- Relatório diário
+- Consulta de detalhes das vendas
+- Cancelamento de vendas
+- Retorno automático dos produtos ao estoque após cancelamento
+- Relatórios de vendas
 - Ranking de produtos vendidos
-- Migração de dados de SQLite para SQL Server
 
 ---
 
-## 🧱 Tecnologias
+## 🛠️ Tecnologias utilizadas
+
+### Desenvolvimento
 
 - Python
-- Tkinter / ttk
+- Tkinter
+- ttk
+
+### Banco de dados
+
 - Microsoft SQL Server
 - SQL
 - PyODBC
-- SQLite (utilizado no processo de migração)
+
+### Outros
+
+- SQLite
 - Git
 - GitHub
+- IA aplicada ao desenvolvimento
 
 ---
 
 ## 🗃️ Banco de dados
 
-O banco `SistemaLoja` utiliza as tabelas principais:
-
-- `produtos`
-- `caixas`
-- `vendas`
-- `itens_venda`
-
-A estrutura SQL de referência está disponível em:
+O sistema utiliza o banco:
 
 ```text
-database/schema.sql
+SistemaLoja
 ```
+
+Com as principais tabelas:
+
+```text
+produtos
+caixas
+vendas
+itens_venda
+```
+
+O arquivo `schema.sql` contém a estrutura utilizada para criação das tabelas.
 
 ---
 
@@ -69,141 +124,148 @@ database/schema.sql
 
 ```text
 Usuário / Operador
-       │
-       ▼
+        │
+        ▼
+Sistema PDV
 Python + Tkinter
-       │
-       │ PyODBC
-       ▼
+        │
+        │ PyODBC
+        ▼
 Microsoft SQL Server
-       │
-       ├── Produtos / Estoque
-       ├── Caixas
-       ├── Vendas
-       └── Itens das vendas
+        │
+        ├── Produtos
+        ├── Estoque
+        ├── Caixas
+        ├── Vendas
+        └── Itens das vendas
 ```
 
-Mais detalhes em [`docs/architecture.md`](docs/architecture.md).
+Mais informações estão disponíveis em:
+
+```text
+architecture.md
+```
 
 ---
 
-## 📂 Estrutura
+## 📂 Estrutura do projeto
 
 ```text
 sistemaloja-pdv/
 │
-├── src/
-│   ├── sistema_loja.py
-│   └── migrar_sqlserver.py
-│
-├── database/
-│   └── schema.sql
-│
-├── docs/
-│   ├── architecture.md
-│   └── images/
-│
-├── .gitignore
-├── LICENSE
+├── sistema_loja.py
+├── migrar_sqlserver.py
+├── schema.sql
+├── architecture.md
+├── requirements.txt
 ├── README.md
-└── requirements.txt
+├── LICENSE
+│
+└── docs/
+    └── images/
+        ├── pdv-principal.png
+        ├── venda.png
+        ├── forma-de-pagamento.png
+        ├── dinheiro.png
+        └── estoque.png
 ```
-
----
-
-## ⚙️ Pré-requisitos
-
-- Python 3
-- Microsoft SQL Server
-- ODBC Driver 18 for SQL Server
-- Banco `SistemaLoja`
-
-Instale a dependência Python:
-
-```bash
-pip install -r requirements.txt
-```
-
-Por padrão, a aplicação utiliza:
-
-```text
-Servidor: localhost
-Banco: SistemaLoja
-Autenticação: Windows / Trusted Connection
-```
-
-Você também pode alterar servidor e banco por variáveis de ambiente:
-
-### Windows CMD
-
-```bat
-set SISTEMALOJA_SQL_SERVER=localhost
-set SISTEMALOJA_SQL_DATABASE=SistemaLoja
-py src\sistema_loja.py
-```
-
----
-
-## ▶️ Executando
-
-```bash
-python src/sistema_loja.py
-```
-
-A aplicação cria/verifica as tabelas necessárias no banco ao iniciar.
 
 ---
 
 ## 🔄 Migração SQLite → SQL Server
 
-O arquivo:
+O projeto também possui o script:
 
 ```text
-src/migrar_sqlserver.py
+migrar_sqlserver.py
 ```
 
-foi criado para migrar um banco legado `loja.db` para o SQL Server preservando os IDs e relacionamentos entre produtos, caixas, vendas e itens.
+Ele foi desenvolvido para migrar os dados de uma versão anterior do sistema em **SQLite** para o **Microsoft SQL Server**.
 
-O script verifica o banco de destino antes da migração e não prossegue caso encontre dados nas tabelas de destino.
+Durante a migração são preservados os IDs utilizados nos relacionamentos entre:
+
+- Produtos
+- Caixas
+- Vendas
+- Itens das vendas
+
+O script também verifica se o banco de destino já possui informações antes de iniciar o processo.
 
 ---
 
-## 🔒 Segurança do repositório
+## ⚙️ Requisitos
 
-O projeto público não inclui:
+- Python 3
+- Microsoft SQL Server
+- ODBC Driver 18 for SQL Server
 
-- banco `loja.db`
-- dados reais de vendas
-- senhas
-- tokens
-- credenciais SQL
-- arquivos de build
+Instale as dependências com:
 
-A conexão padrão utiliza `Trusted_Connection=yes`, sem senha hardcoded.
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## ▶️ Executando o projeto
+
+Com o SQL Server ativo e o banco configurado:
+
+```bash
+python sistema_loja.py
+```
+
+A conexão padrão utiliza:
+
+```text
+Servidor: localhost
+Banco: SistemaLoja
+Autenticação: Windows
+```
 
 ---
 
 ## 🤖 Uso de IA no desenvolvimento
 
-IA foi utilizada como ferramenta de apoio durante o projeto para:
+Durante o desenvolvimento, utilizei Inteligência Artificial como ferramenta de apoio principalmente para:
 
-- revisão de código
-- identificação e correção de erros
-- sugestões de interface
-- análise de pontos fracos
-- refatoração e documentação
+- revisão de código;
+- identificação de erros;
+- depuração;
+- sugestões de melhorias;
+- evolução da interface;
+- análise de segurança;
+- documentação;
+- organização do projeto.
 
-As decisões sobre regras do sistema, fluxo do PDV, banco de dados e validação das funcionalidades fizeram parte do desenvolvimento do projeto.
+A IA foi utilizada como suporte no processo de desenvolvimento, enquanto as regras de negócio, testes e decisões sobre o funcionamento do sistema foram sendo avaliadas e ajustadas durante a construção do projeto.
 
 ---
 
-## 🚀 Próximas evoluções
+## 📊 Integração com Analytics
 
-- Integração direta com o dashboard web do SistemaLoja
-- Perfis de usuário e permissões
+Os dados gerados pelo SistemaLoja também serviram como base para o desenvolvimento de um **dashboard web**, permitindo analisar indicadores como:
+
+- faturamento;
+- quantidade de vendas;
+- ticket médio;
+- formas de pagamento;
+- produtos mais vendidos;
+- estoque baixo.
+
+Essa integração permitiu unir **desenvolvimento de sistemas, banco de dados e análise de dados** em um mesmo projeto.
+
+---
+
+## 🚀 Possíveis evoluções
+
+- Controle de usuários e permissões
 - Auditoria de operações
 - Exportação de relatórios
-- Instalador/empacotamento da aplicação
+- Integração direta com o dashboard web
+- Backup automatizado
+- Instalador da aplicação
+- Novos indicadores de vendas e estoque
 
 ---
 
@@ -211,4 +273,4 @@ As decisões sobre regras do sistema, fluxo do PDV, banco de dados e validação
 
 **Gabriel Nascimento**
 
-Projeto de portfólio com foco em desenvolvimento de sistemas, banco de dados e análise de dados.
+Projeto desenvolvido para estudo e portfólio com foco em **Python, SQL Server, Banco de Dados, Sistemas e Análise de Dados**.
